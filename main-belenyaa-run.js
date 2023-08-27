@@ -44,6 +44,7 @@ let saltando = false;
 let dasheando = false;
 let isDoubleJumpAvailable = true;
 let isDashAvailable = true;
+let isInmune = true
 
 let tiempoHastaObstaculo = 2;
 let tiempoObstaculoMin = 0.7;
@@ -119,13 +120,12 @@ let gameOver;
             saltando = false
             isDashAvailable = false;
             console.log("dasheando pibe")
-            dino.style.left = "120px"
-            dino.classList.add("belenyaa-corriendo");
+            dino.classList.add("belenyaa-corriendo")
+            dino.classList.add("belenyaa-avance")
         }
     }
 
     function caer() {
-        console.log("cayendo")
         if(dinoPosY !== sueloY){
             velY = -impulso;
         }
@@ -141,13 +141,14 @@ let gameOver;
 
     function tocarSuelo() {
         if (dasheando) {
+            dino.classList.remove("belenyaa-avance")
             dino.classList.add("belenyaa-retroceso")
-            dino.addEventListener('animationend', function(){
-                dino.style.left = '20px'
-                dino.classList.remove('belenyaa-retroceso')
-            })
             dasheando = false
             isDashAvailable = true
+            dino.addEventListener('animationend', function(){
+                dino.classList.remove('belenyaa-retroceso')
+            })
+            
         }
         dinoPosY = sueloY;
         velY = 10;
@@ -240,8 +241,8 @@ let gameOver;
     function acumularPuntos() {
         score++;
         textoScore.innerText = score;
-        if(score == 50){
-            gameVel = 1.2;
+        if(score == 1){
+            gameVel = 1;
             contenedor.classList.add("mediodia");
         }else if(score == 100) {
             gameVel = 2;
@@ -254,7 +255,8 @@ let gameOver;
     }
 
     function perderJuego() {
-        //chocar();
+        //if (isInmune) return
+        chocar();
         gameOver.style.display = "block";
     }
 
