@@ -42,6 +42,8 @@ let score = 0;
 let parado = false;
 let saltando = false;
 let dasheando = false;
+let isDoubleJumpAvailable = true;
+let isDashAvailable = true;
 
 let tiempoHastaObstaculo = 2;
 let tiempoObstaculoMin = 0.7;
@@ -101,21 +103,23 @@ let gameOver;
             saltando = true;
             velY = impulso;
             dino.classList.remove("belenyaa-corriendo");
-        } else if(dinoPosY !== sueloY){
+        } else if(dinoPosY !== sueloY && isDoubleJumpAvailable){
             saltando = false;
-            velY = impulso/2;
+            velY = impulso/1.8;
             dino.classList.add("dino-corriendo");
             saltando = true
+            isDoubleJumpAvailable = false;
             //FUNCION DOBLE SALTO
         } 
     }
 
     function dashear(){
-        if (saltando) {
-            dasheando = true
-            console.log("dasheando pibe")
+        if (saltando && isDashAvailable) {
+            dasheando = true            
             saltando = false
-            dino.style.left = "70px"
+            isDashAvailable = false;
+            console.log("dasheando pibe")
+            dino.style.left = "120px"
             dino.classList.add("belenyaa-corriendo");
         }
     }
@@ -141,9 +145,9 @@ let gameOver;
             dino.addEventListener('animationend', function(){
                 dino.style.left = '20px'
                 dino.classList.remove('belenyaa-retroceso')
-                
             })
             dasheando = false
+            isDashAvailable = true
         }
         dinoPosY = sueloY;
         velY = 10;
@@ -151,7 +155,7 @@ let gameOver;
             dino.classList.add("belenyaa-corriendo");
         }
         saltando = false;
-        
+        isDoubleJumpAvailable = true;
     }
 
     function moverSuelo() {
@@ -250,7 +254,7 @@ let gameOver;
     }
 
     function perderJuego() {
-        chocar();
+        //chocar();
         gameOver.style.display = "block";
     }
 
