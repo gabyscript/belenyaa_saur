@@ -1,5 +1,3 @@
-console.log("hola")
-
 //****** GAME LOOP ********//
 
 let time = new Date();
@@ -60,11 +58,13 @@ let minNubeY = 100;
 let nubes = [];
 let velNube = 0.5;
 
+let introGame = true
+
 let contenedor;
 let dino;
 let textoScore;
 let suelo;
-let gameOver;
+let gameOver;   
 
     function comenzarJuego() {
         gameOver = document.querySelector(".game-over");
@@ -75,16 +75,35 @@ let gameOver;
         document.addEventListener("keydown", HandleKeyDown);
     }
 
+    let introContainer = document.getElementById('intro-contenedor')
+    let iniciarBtn = document.getElementById('iniciar-btn')
+
+    iniciarBtn.addEventListener('click', function(){
+        introContainer.classList.remove("d-flex")
+        introContainer.style.display="none"
+        contenedor.classList.add('contenedor-ingame')
+
+        contenedor.addEventListener('animationend', function(){
+            contenedor.style.height = "250px"            
+            introGame = false
+            contenedor.classList.remove('contenedor-ingame')
+        })
+
+    })
+
     function actualizar() {
         if(parado) return;
         
-        moverDinosaurio();
+        moverBelenya();
         moverSuelo();
-        decidirCrearObstaculos();
         decidirCrearNubes();
-        moverObstaculos();
         moverNubes();
-        detectarColision();
+        if (!introGame) {
+            decidirCrearObstaculos();            
+            moverObstaculos();
+            detectarColision();
+        }
+        
 
         velY -= gravedad * deltaTime;
     }
@@ -131,7 +150,7 @@ let gameOver;
         }
     }
 
-    function moverDinosaurio() {
+    function moverBelenya() {
         dinoPosY += velY * deltaTime;
         if(dinoPosY < sueloY){        
             tocarSuelo();

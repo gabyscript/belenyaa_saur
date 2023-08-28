@@ -10,9 +10,13 @@ body{
     align-items: center;
 }
 
-.contenedor {
+#intro-contenedor {
+    font-family: 'Press Start 2P', cursive;
+}
+
+.contenedor {    
     width: 95vw;
-    height: 280px;
+    height: 80vh;
     margin: 0 auto;
     
     position: relative;
@@ -20,6 +24,10 @@ body{
     background: linear-gradient(#b7d6c7, transparent) #ffe2d1;/*linear-gradient(#90ebff, white);*/
     transition: background-color 1s linear;
     overflow: hidden;
+}
+
+.contenedor-ingame {
+    animation: container-achicar 3s ease-in-out;
 }
 
 .mediodia {
@@ -178,5 +186,14 @@ body{
     }
     to{
         left: 30px
+    }
+}
+
+@keyframes container-achicar {
+    from {
+        height: 80vh;
+    }
+    to {
+        height: 250px;
     }
 }
