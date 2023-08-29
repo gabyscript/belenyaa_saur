@@ -1,0 +1,210 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    height: 100vh;
+    background: #ce7ac7;
+    display: flex;
+    align-items: center;
+}
+
+#intro-contenedor {
+    font-family: 'Press Start 2P', cursive;
+}
+
+.contenedor {    
+    width: 95vw;
+    height: 80vh;
+    margin: 0 auto;
+    
+    position: relative;
+
+    background: linear-gradient(#b7d6c7, transparent) #ffe2d1;/*linear-gradient(#90ebff, white);*/
+    transition: background-color 1s linear;
+    overflow: hidden;
+}
+
+.contenedor-ingame {
+    animation: container-achicar 3s ease-in-out;
+}
+
+.mediodia {
+    background-color: #ffdcf3;
+}
+
+.tarde {
+    background-color: #ffadad;
+}
+
+.noche {
+    background-color: #aca8c7;
+}
+
+.belenyaa {
+    width: 84px;
+    height: 84px;
+
+    position: absolute;
+    left: 30px;
+    z-index: 2;
+
+    background: url(/assets/img/belenyaa-standing.gif) repeat-x 0px 0px;
+    background-size: 90px 85px;
+    background-position-x: 0px;
+
+}
+
+.belenyaa-corriendo {
+    background: url(/assets/img/belenyaa-running.gif) repeat-x 0px 0px;
+    background-size: 90px 84px;
+    background-position-x: 0px;
+}
+.belenyaa-estrellada {
+    background-position-x: -252px;
+    background: url(/assets/img/belenyaa-standing.gif) repeat-x 0px 0px;
+    background-size: 90px 85px;
+    background-position-x: 0px;
+}
+
+.dino {
+    width: 84px;
+    height: 84px;
+
+    position: absolute;
+    bottom: 22px;
+    left: 42px;
+    z-index: 2;
+
+    background: url(img/dino.png) repeat-x 0px 0px;
+    background-size: 336px 84px;
+    background-position-x: 0px;
+
+}
+
+.dino-corriendo {
+    animation: animarDino 0.25s steps(2) infinite;
+}
+.dino-estrellado {
+    background-position-x: -252px;
+}
+
+.suelo {
+    width: 200%;
+    height: 42px;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    background: url(/assets/img/suelo.png) repeat-x 0px 0px;
+    background-size: 50% 42px;
+
+}
+
+.cactus{
+    width: 46px;
+    height: 96px;
+
+    position: absolute;
+    bottom: 16px;
+    left: 600px;
+    z-index: 1;
+
+    background: url(/assets/img/cactus1.png) no-repeat;
+}
+.cactus2{
+    width: 98px;
+    height: 66px;
+
+    background: url(/assets/img/cactus2.png) no-repeat;
+}
+
+.nube{
+    width: 92px;
+    height: 26px;
+
+    position: absolute;
+    z-index: 0;
+
+    background: url(/assets/img/nube.png) no-repeat;
+    background-size: 92px 26px;
+}
+
+.score{
+    width: 100px;
+    height: 30px;
+
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    z-index: 10;
+
+    color: #d48871;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: right;
+
+    display: none;
+}
+
+.game-over{
+    display: none;
+
+    position: absolute;
+    width: 100%;
+
+
+    text-align: center;
+    color: #7e928b;
+    font-size: 30px;
+    font-family: 'Press Start 2P', cursive;
+    font-weight: 700;
+}
+
+#reset-btn {
+    width: 150px;
+    height: 35px;
+    border-radius: 15px;
+    font-size: 14px;
+    
+}
+
+.belenyaa-avance {
+    animation: dash 0.1s ease-in;
+    left: 120px;
+}
+
+.belenyaa-retroceso {
+    animation: retroceder 1.2s ease-in-out;
+}
+
+@keyframes dash {
+    from {
+        left: 30px
+    }
+    to {
+        left: 120px
+    }
+}
+
+@keyframes retroceder{
+    from {
+        left: 110px
+    }
+    to{
+        left: 30px
+    }
+}
+
+@keyframes container-achicar {
+    from {
+        height: 80vh;
+    }
+    to {
+        height: 350px;
+    }
+}
+

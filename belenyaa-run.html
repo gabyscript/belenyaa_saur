@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style-belenyaa-run.css">
+    <link rel="stylesheet" href="assets/styles/style-belenyaa-run.css">
     <title>Belenyaa Chrome</title>
 </head>
 <body>
@@ -19,8 +19,7 @@
             <div class="div-title d-flex flex-column justify-content-center align-items-center">
                 <h1 >Belenyaa</h1>
                 <h2 >Road to Japan</h2>
-            </div>
-    
+            </div>    
             <div id="button-div" class="div-title d-flex flex-column justify-content-center align-items-center">
                 <button id="iniciar-btn">
                     Iniciar
@@ -28,6 +27,12 @@
                 <button id="instrucciones-btn">
                     Instrucciones
                 </button>
+                <button id="configuraciones-btn">
+                    Configuraciones
+                </button>
+            </div>
+            <div id="" class="d-flex flex-column justify-content-center align-items-center">
+                <p>Hola</p>
             </div>
         </div>
         
@@ -41,11 +46,18 @@
     </div>
 
     <div class="game-over">
-        <h3>GAME OVER</h3>
+        <h3 class="h-1">GAME OVER</h3>
         <button id="reset-btn">Reiniciar</button>
     </div>
 
+    <audio
+    src="assets/music/anoko-8-bit.mp3"
+    class="anoko-secret"
+    id="anoko-secret"
+    preload="auto">        
+    </audio>     
 
-    <script src="main-belenyaa-run.js"></script>
+    <script src="assets/scripts/belenyaa-run-configuration.js"></script>
+    <script src="assets/scripts/main-belenyaa-run.js"></script>
 </body>
 </html>
