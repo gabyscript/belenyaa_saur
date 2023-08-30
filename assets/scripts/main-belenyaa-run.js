@@ -1,81 +1,91 @@
 //****** GAME LOOP ********//
 
-let time = new Date();
-let deltaTime = 0;
+    let time = new Date();
+    let deltaTime = 0;
 
-let gameMusic = document.getElementById('anoko-secret')
+    let gameMusic = document.getElementById('anoko-secret')
 
-gameMusic.loop= true;
+    gameMusic.loop= true;
 
+    gameMusic.addEventListener('ended', function(){
+        this.currentTime= 0;
+        this.play();
+    },false);
 
-gameMusic.addEventListener('ended', function(){
-    this.currentTime= 0;
-    this.play();
-},false);
+    if(document.readyState === "complete" || document.readyState === "interactive"){
+        setTimeout(iniciar, 1);
+    } else{
+        document.addEventListener("DOMContentLoaded", iniciar); 
+    }
 
-if(document.readyState === "complete" || document.readyState === "interactive"){
-    setTimeout(iniciar, 1);
-} else{
-    document.addEventListener("DOMContentLoaded", iniciar); 
-}
+    function iniciar() {
+        impulso = 900;
+        gameMusic.play()
+        time = new Date();
+        comenzarJuego();
+        loopear();
+    }
 
-function iniciar() {
-    gameMusic.play()
-    time = new Date();
-    comenzarJuego();
-    loopear();
-}
+    function loopear() {
+        deltaTime = (new Date() - time) / 1000;
+        time = new Date();
+        actualizar();
+        requestAnimationFrame(loopear);
+    }
 
-function loopear() {
-    deltaTime = (new Date() - time) / 1000;
-    time = new Date();
-    actualizar();
-    requestAnimationFrame(loopear);
-}
+    //****** GAME LOGIC ********//
 
-//****** GAME LOGIC ********//
+    let sueloY = 22;
+    let velY = 0;
+    let impulso = 900;
+    let gravedad = 2500;
 
-let sueloY = 22;
-let velY = 0;
-let impulso = 900;
-let gravedad = 2500;
+    let dinoPosX = 42;
+    let dinoPosY = sueloY; 
 
-let dinoPosX = 42;
-let dinoPosY = sueloY; 
+    let sueloX = 0;
+    let velEscenario = 1280/3;
+    let gameVel = 1;
+    let score = 0;
 
-let sueloX = 0;
-let velEscenario = 1280/3;
-let gameVel = 1;
-let score = 0;
+    let parado = false;
+    let saltando = false;
+    let dasheando = false;
+    let isDoubleJumpAvailable = true;
+    let isDashAvailable = true;
+    let isInmune = true
 
-let parado = false;
-let saltando = false;
-let dasheando = false;
-let isDoubleJumpAvailable = true;
-let isDashAvailable = true;
-let isInmune = true
+    let tiempoHastaObstaculo = 2;
+    let tiempoObstaculoMin = 0.7;
+    let tiempoObstaculoMax = 1.8;
+    let obstaculoPosY = 16;
+    let obstaculos = [];
 
-let tiempoHastaObstaculo = 2;
-let tiempoObstaculoMin = 0.7;
-let tiempoObstaculoMax = 1.8;
-let obstaculoPosY = 16;
-let obstaculos = [];
+    let tiempoHastaNube = 0.5;
+    let tiempoNubeMin = 0.7;
+    let tiempoNubeMax = 2.7;
+    let maxNubeY = 270;
+    let minNubeY = 100;
+    let nubes = [];
+    let velNube = 0.5;
 
-let tiempoHastaNube = 0.5;
-let tiempoNubeMin = 0.7;
-let tiempoNubeMax = 2.7;
-let maxNubeY = 270;
-let minNubeY = 100;
-let nubes = [];
-let velNube = 0.5;
+    let introGame = true
 
-let introGame = true
+    let contenedor;
+    let dino;
+    let textoScore;
+    let suelo;
+    let gameOver;   
+    
+    const resetBtn = document.getElementById('reset-btn')
 
-let contenedor;
-let dino;
-let textoScore;
-let suelo;
-let gameOver;   
+    resetBtn.addEventListener('click', function(){
+
+        console.log("Reiniciando");
+
+        // Restaurar variables y propiedades iniciales
+        window.location.reload()
+    })
 
     function comenzarJuego() {
         gameOver = document.querySelector(".game-over");
@@ -117,7 +127,6 @@ let gameOver;
             moverObstaculos();
             detectarColision();
         }
-        
 
         velY -= gravedad * deltaTime;
     }
@@ -137,6 +146,7 @@ let gameOver;
             saltando = true;
             velY = impulso;
             dino.classList.remove("belenyaa-corriendo");
+            console.log(impulso, velY)
         } else if(dinoPosY !== sueloY && isDoubleJumpAvailable){
             saltando = false;
             velY = impulso/1.8;
@@ -177,7 +187,7 @@ let gameOver;
             dino.classList.remove("belenyaa-avance")
             dino.classList.add("belenyaa-retroceso")
             dasheando = false
-            isDashAvailable = true
+            isDashAvailable = true            
             dino.addEventListener('animationend', function(){
                 dino.classList.remove('belenyaa-retroceso')
             })
@@ -319,14 +329,4 @@ let gameOver;
         );
     }
 
-    const resetBtn = document.getElementById('reset-btn')
-
-    resetBtn.addEventListener('click', function(){
-
-        console.log("Reiniciando")
-
-        deltaTime = 0
-        score = 0
-        textoScore.innerText = score;
-        
-    })
+    

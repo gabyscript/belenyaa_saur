@@ -37,6 +37,12 @@
     /*animation: runningAnimationIcon 3s infinite;*/
 }
 
+.belenya-stand-icon {
+    width: 21px;
+    height: 27px;
+    background-image: url(/assets/img/belenyaa-standing-icon.gif)
+}
+
 .inpage-links {
     color:#F2f2f2
 }
